@@ -17,12 +17,12 @@ pipeline {
         }
         stage('Build the docker image...') {
             steps {
-                docker build -t ecommerce-app:1 .
+                docker build -t ecommerce-app .
             }
         } 
         stage('Running the docker image...') {
             steps {
-                sh 'docker run -d -p 5000:4040 ecommerce-app:1'
+                sh 'docker run -d -p 5000:4040 ecommerce-app'
             }
         } 
         
