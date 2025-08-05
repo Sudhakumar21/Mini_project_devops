@@ -113,6 +113,73 @@ flask==2.3.3
 
 ---
 
+PHASE-2 Plan
+===============
+
+## ☁️ AWS EC2 Deployment Guide
+
+You can deploy this Flask web application on an AWS EC2 instance as follows:
+
+### 🔑 Step 7: Launch an AWS EC2 Instance
+
+1. Log in to your AWS Management Console.
+2. Navigate to **EC2** > **Instances** > **Launch Instance**.
+3. Choose an Amazon Linux 2 or Ubuntu Server AMI.
+4. Choose a t2.micro instance type (free tier eligible).
+5. Create or select an existing key pair to SSH into the instance.
+6. Configure security group to allow:
+   - **TCP Port 22** for SSH access.
+   - **TCP Port 5000** (or any port your Flask app runs on).
+   - **TCP Port 8080/80** (if you use NGINX or expose web ports).
+
+---
+
+### 💻 Step 8: Connect and Setup EC2
+
+1. SSH into your EC2 instance:
+
+```bash
+ssh -i your-key.pem ec2-user@your-ec2-public-ip
+```
+
+2. Update packages and install required tools:
+
+```bash
+sudo apt update && sudo apt install -y docker.io docker-compose git python3-pip
+sudo usermod -aG docker $USER
+newgrp docker
+```
+
+3. (Optional) Install Jenkins on EC2 if needed.
+
+---
+
+### 📦 Step 9: Clone and Deploy Application
+
+```bash
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
+docker-compose up --build -d
+```
+
+---
+
+### 🌐 Step 10: Access the Web Application
+
+- Open your browser and navigate to:  
+  `http://<your-ec2-public-ip>:5000`
+
+- Ensure the security group allows inbound access to this port.
+
+---
+
+### 🔒 Step 11: Security and Monitoring
+
+- Configure a reverse proxy (e.g., NGINX) for production readiness.
+- Use AWS CloudWatch or external tools to monitor logs and resource usage.
+- Use a custom domain or Route 53 for DNS mapping (optional).
+- Set up HTTPS using Let's Encrypt or ACM (optional).
+
 ## 📎 License
 
 This project is licensed under the [MIT License](LICENSE).
