@@ -1,69 +1,126 @@
-# Mini_project_devops
-To learn devops concepts and foccus on working on github, jenkins, docker, AWS instances, kubernetes.
+# Flask Web Application with Docker and Jenkins CI/CD
 
-A simple ecommerce welcome page designed using python flask which will be deployed using docker, jenkins, kubernetes and EC2 instances.
-## Table of Contents
-1. Docker
-2. Docker Compose
-3. Jenkins
-4. EC2 Instance
-5. Kubernetes
+## 📌 Project Overview
 
-## Deployment using Docker
+This project demonstrates how to develop, containerize, and deploy a Python Flask web application using Docker and automate the deployment pipeline using Jenkins. The web application will be run inside a Docker container using `docker-compose` and deployed through a Jenkins job that pulls code from a GitHub repository.
 
-To deploy this project run the following commands,
- - In order to build docker image
+---
 
-```bash
-  docker build -t ecommerce_app .
+## ⚙️ Tech Stack
+
+- **Language**: Python 3.x  
+- **Web Framework**: Flask  
+- **Containerization**: Docker & Docker Compose  
+- **CI/CD**: Jenkins  
+- **Version Control**: Git & GitHub  
+
+---
+
+## 📁 Project Structure (Planned)
+
+```
+project-root/
+│
+├── app/
+│   ├── app.py
+│   ├── templates/
+│   └── static/
+│
+├── requirements.txt
+├── Dockerfile
+├── docker-compose.yml
+└── README.md
 ```
 
- - Now to run container using built image
+---
+
+## ✅ Prerequisites
+
+Ensure the following are installed on your system:
+
+- Python 3.x
+- pip (Python package installer)
+- Flask (`pip install flask`)
+- Docker Engine
+- Docker Compose
+- Git
+- curl & wget
+- Jenkins (Installed on a virtual Linux machine)
+
+---
+
+## 🚀 Installation & Setup Steps
+
+### 🔧 Step 1: Create a New GitHub Repository
+
+Create a repository on GitHub to maintain the project code. Clone it to your local system.
 
 ```bash
-  docker run -d -p 3000:3000 --name ecommerce_app_container ecommerce_app
+git clone https://github.com/yourusername/your-repo-name.git
+cd your-repo-name
 ```
 
-## Deployment using Docker-compose
+---
 
-To deploy this project using docker-compose run the following commands,
+### 🛠 Step 2: Develop Flask Application
 
-```bash
-  docker-compose up -d
+- Create a simple Flask application under the `app/` directory.
+- Create a `requirements.txt` file listing all dependencies.
+
+Example:
+
+```text
+flask==2.3.3
 ```
 
-## Deployment using Jenkins
+---
 
-You can access jenkins at http://localhost:8080
+### 🐳 Step 3: Create Dockerfile and docker-compose.yml
 
-A job ecommerce was created, once it builds successfully. You can access the ecommerce portal at http://localhost:5000
+- Write a `Dockerfile` to containerize the Flask app.
+- Write a `docker-compose.yml` to define container behavior, including ports, volumes, and networks.
 
-## Deployment using EC2 instance
+---
 
-- Create an Ec2 instance and install docker, docker-compose and git
-```bash
-  sudo apt update && sudo apt upgrade -y
-  sudo apt install -y docker.io docker-compose git
-```
-- Start and enable docker
-```bash
-  sudo systemctl start docker
-  sudo systemctl enable docker
-```
-- Clone your git repo 
-```bash
-  git clone https://github.com/your/repo.git
-```
-- Navigate to repo folder
-- Now to run container using built image - Docker
+### 🧪 Step 4: Setup Jenkins on a Virtual Machine
 
-```bash
-  docker run -d -p 3000:3000 --name ecommerce_app_container ecommerce_app
-```
-- Using docker-compose,
+- Install Docker Engine and Jenkins on a Linux VM.
+- Start and configure Jenkins server.
 
-```bash
-  docker-compose up -d
-```
-- Finally access the application at Access: http://<your-ec2-public-ip>:3000
+---
 
+### 🔁 Step 5: Configure Jenkins Job
+
+1. Create a new Jenkins freestyle or pipeline job.
+2. Configure the job to:
+   - Pull code from your GitHub repository.
+   - Execute the `docker-compose up --build` command to run the Flask app inside a container.
+
+---
+
+### ✅ Step 6: Verify Deployment
+
+- After Jenkins completes the build and deployment:
+  - Verify that the Flask app is running inside the Docker container.
+  - Access the web application via the forwarded port (e.g., `http://<vm-ip>:5000`).
+
+---
+
+## 📝 Notes
+
+- Ensure required ports are exposed in `docker-compose.yml`.
+- Configure firewall or security groups if deploying to a cloud VM.
+
+---
+
+## 📎 License
+
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+## 🙋‍♂️ Author
+
+**Niresh Shanmugam**  
+GitHub: [nireshs](https://github.com/nireshs)  
+Email: niresh.shanmugam@gmail.com
